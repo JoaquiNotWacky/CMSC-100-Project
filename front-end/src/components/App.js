@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import View from './View';
+import Category from './Category';
+import Questions from './Questions';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -8,7 +9,8 @@ class App extends Component {
       <div id="main">
         <Router>
           <div id="content-container">
-            <Route exact={true} path="/" component={View} />
+            <Route exact={true} path="/" component={Category} />
+            <Route path="/category-questions/:categoryId" component={Questions} />
           </div>
         </Router>
       </div>

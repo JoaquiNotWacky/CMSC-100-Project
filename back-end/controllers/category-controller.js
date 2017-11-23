@@ -12,6 +12,19 @@ exports.viewCategories = (req, res) =>{
   });
 }
 
+exports.findById = (req, res) => {
+  const _id = req.params._id;
+
+  Category.findOne({ _id }, (err, category) => {
+    if (err) {
+      console.log(err);
+      res.send({});
+    } else {
+      res.send(category);
+    }
+  });
+}
+
 exports.addCategory = (req, res) =>{
 
 }

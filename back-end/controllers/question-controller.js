@@ -2,7 +2,10 @@ const Question = require('../models/Question');
 
 
 exports.viewQuestions = (req, res) =>{
-  Question.find({}, (err, questions) => {
+  const cat = req.params.category;
+  const dif = req.params.difficulty;
+
+  Question.find({category: cat, difficulty: dif}, (err, questions) => {
     if (err) {
       console.log(err);
       res.send({});
@@ -13,11 +16,18 @@ exports.viewQuestions = (req, res) =>{
 }
 
 
-
 exports.addQuestion = (req, res) =>{
 
 }
 
 exports.deleteQuestion = (req, res) =>{
+  const _id = req.body._id;
 
+  Question.remove({ _id }, (err) => {
+    if (err) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+  });
 }
