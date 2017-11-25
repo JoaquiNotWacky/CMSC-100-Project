@@ -17,7 +17,14 @@ exports.viewQuestions = (req, res) =>{
 
 
 exports.addQuestion = (req, res) =>{
+  const newQuestion = new Question(req.body);
 
+  newQuestion.save((err, question)=>{
+    if(err){ res.send({});
+    }else {
+      res.json(question);
+    }
+  });
 }
 
 exports.deleteQuestion = (req, res) =>{

@@ -7,6 +7,8 @@ router.post('/delete-question', QuestionController.deleteQuestion);
 router.get('/view-categories', CategoryController.viewCategories);
 router.get('/find-category-by-id/:_id', CategoryController.findById);
 
+
+router.post('/add-question', QuestionController.addQuestion);
 //Edit Category
 //Edit Question
 

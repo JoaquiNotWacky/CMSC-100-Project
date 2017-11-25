@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Category from './Category';
-import Questions from './Questions';
+import Category from './View/Category';
+import AddQuestion from './View/Add/AddQuestion';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
 class App extends Component {
@@ -10,7 +10,7 @@ class App extends Component {
         <Router>
           <div id="content-container">
             <Route exact={true} path="/" component={Category} />
-            <Route path="/category-questions/:categoryId" component={Questions} />
+            <Route path="/add-question/:categoryName" component={AddQuestion}/>
           </div>
         </Router>
       </div>
