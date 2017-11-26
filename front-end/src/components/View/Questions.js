@@ -37,11 +37,11 @@ getNew(){
 }
 
 getQuestions(){
-	console.log(this.state.category);
 	fetch(`http://localhost:3001/quiz-game/view-questions/${this.state.category}/Easy`)
 	.then((response)=> {return response.json()})
 	.then((result)=>{
 		this.setState({question_easy: result});
+		console.log(this.state.question_easy);
 	}).catch((e)=> {console.log(e);});
 
 	fetch(`http://localhost:3001/quiz-game/view-questions/${this.state.category}/Average`)

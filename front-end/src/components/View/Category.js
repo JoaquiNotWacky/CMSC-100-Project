@@ -34,19 +34,43 @@ class Category extends Component{
 		}
 	}
 
+	add_category(){
+		const new_category = {
+			name: this.state.name,
+		}
+
+		request.post(
+			'http://localhost:3001/quiz-game/add-category',
+			{form: new_category},
+			(error, response, body) => {
+				console.log(body);
+			}
+		);
+	}
+
 	render(){
 		return(
 			<div className="content">
-				<h1> Categories</h1>
 
-				<button>ADD CATEGORY</button>
-				{this.state.category_name}
-				<ol>
-				{this.state.category.map((category) =>{
-					return (<li key={category._id}> <button onClick={this.handle_chosen_category} value={category._id}> {category.name} </button> </li>)
-				})}
-				</ol>
-				{this.display_questions()}
+				<aside className="categories">
+
+					<h1> Categories</h1>
+
+					<button>ADD CATEGORY</button>
+					{this.state.category_name}
+					<ol>
+					{this.state.category.map((category) =>{
+						return (<li key={category._id}> <button onClick={this.handle_chosen_category} value={category._id}> {category.name} </button> </li>)
+					})}
+					</ol>
+				</aside>
+
+				<section clasName="questions">
+
+					{this.display_questions()}
+				</section>
+
+				<footer className="foot"></footer>
 
 			</div>
 		);

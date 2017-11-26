@@ -26,7 +26,14 @@ exports.findById = (req, res) => {
 }
 
 exports.addCategory = (req, res) =>{
+  const newCategory = new Question(req.body);
 
+  newCategory.save((err, category)=>{
+    if(err){ res.send({});
+    }else {
+      res.json(category);
+    }
+  });
 }
 
 exports.deleteCategory = (req, res) =>{
