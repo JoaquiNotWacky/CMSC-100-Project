@@ -56,12 +56,10 @@ class AddQuestion extends Component{
 				<a href={`/`}> BACK TO CATEGORIES </a>
 			<h1>{this.state.category}</h1>
 			<h2>Type of Question </h2>
-			<ul>
-			 <li><button onClick={this.handle_text_change}>Text</button></li>
-			 <li><button onClick={this.handle_num_change}>Number</button></li>
-			 <li><button onClick={this.handle_mc_change}>Multiple Choice</button></li>
-			 <li><button onClick={this.handle_tof_change}>True or False</button></li>
-			</ul>
+			<button onClick={this.handle_text_change}>Text</button>
+			 <button onClick={this.handle_num_change}>Number</button>
+			 <button onClick={this.handle_mc_change}>Multiple Choice</button>
+			 <button onClick={this.handle_tof_change}>True or False</button>
 			{ this.check_question_type() }
 			</div>
 		);

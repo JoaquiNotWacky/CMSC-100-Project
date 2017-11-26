@@ -10,6 +10,7 @@ exports.viewQuestions = (req, res) =>{
       console.log(err);
       res.send({});
     } else {
+      console.log(questions)
       res.send(questions);
     }
   });
@@ -18,7 +19,6 @@ exports.viewQuestions = (req, res) =>{
 
 exports.addQuestion = (req, res) =>{
   const newQuestion = new Question(req.body);
-
   newQuestion.save((err, question)=>{
     if(err){ res.send({});
     }else {
@@ -36,5 +36,19 @@ exports.deleteQuestion = (req, res) =>{
     } else {
       res.send(true);
     }
+  });
+}
+
+
+exports.deleteCategoryQuestions = (req, res) =>{
+  const name = req.body.name;
+
+  Question.remove({category: name}, (err)=>{
+    if (err) {
+      res.send(false);
+    } else {
+      res.send(true);
+    }
+
   });
 }

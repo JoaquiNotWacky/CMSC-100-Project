@@ -63,13 +63,14 @@ class AddText extends Component{
 				console.log(body);
 			}
 		);
+
+    		location.href = '/';
 	}
 
   render(){
     return(
       <div>
         <fieldset>
-          <h1>Add Question</h1>
           <PlainText placeholder={this.state.question_placeholder} error={this.state.question_error} changeHandler={this.handleQuestionChange}/>
           <div className="error-message">{this.state.question_text.trim() === ''  ? 'Question is required' : ''}</div>
           <PlainText placeholder={this.state.answer_placeholder} error={this.state.answer_error} changeHandler={this.handleAnswerChange}/>

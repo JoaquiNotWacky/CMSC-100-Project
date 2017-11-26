@@ -91,7 +91,7 @@ getQuestions(){
 
 			<ol>
 			{this.state.question_easy.map((question) =>{
-				return (<li key={question._id}> {question.question}  <button type="button" onClick={ () => this.delete_question_easy(question._id, question.difficulty)}> DELETE </button></li>)
+				return (<li key={question._id}> {question.question} <button type="button" onClick={ () => this.delete_question_easy(question._id, question.difficulty)}> DELETE </button></li>)
 			})}
 			</ol>
 

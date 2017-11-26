@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+const request = require('request');
 
 class AddMultipleChoice extends Component{
-
 	constructor(props){
 		super(props);
 
@@ -11,7 +11,6 @@ class AddMultipleChoice extends Component{
 			category: this.props.categoryName,
 			difficulty: 'Easy',
 			answer: 'A',
-			buttonClicked: false,
 			A:'',
 			B:'',
 			C:'',
@@ -76,8 +75,23 @@ class AddMultipleChoice extends Component{
 			type: this.state.type,
 			category: this.state.category,
 			difficulty: this.state.difficulty,
-			answer: this.state.answer
+			answer: this.state.answer,
+			A: this.state.A,
+			B: this.state.B,
+			C: this.state.C,
+			D: this.state.D
 		}
+
+		request.post(
+			'http://localhost:3001/quiz-game/add-question',
+			{form: new_question},
+			(error, response, body) => {
+				console.log(body);
+			}
+		);
+
+		location.href = '/';
+
 
 	}
 

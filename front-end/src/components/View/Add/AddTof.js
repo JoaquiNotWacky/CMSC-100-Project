@@ -61,6 +61,8 @@ class AddTof extends Component{
 				console.log(body);
 			}
 		);
+
+		location.href = '/';
 	}
 
 	render(){
