@@ -59,7 +59,7 @@ getQuestions(){
 
 
 	delete_question_easy(_id, difficulty){
-		if(difficulty == "Easy") {
+		if(difficulty === "Easy") {
 			if(this.state.question_easy.length > 1) request.post('http://localhost:3001/quiz-game/delete-question', { form: {_id} }, (error, response, body) => { console.log(body); });
 			else alert("Must at least have 1 question");
 			this.getQuestions()
@@ -67,7 +67,7 @@ getQuestions(){
 	}
 
 	delete_question_average(_id, difficulty){
-		if(difficulty == "Average"){
+		if(difficulty === "Average"){
 			if(this.state.question_average.length > 1) request.post('http://localhost:3001/quiz-game/delete-question', { form: {_id} }, (error, response, body) => { console.log(body); });
 			else alert("Must at least have 1 question");
 			this.getQuestions()
@@ -75,7 +75,7 @@ getQuestions(){
 	}
 
 	delete_question_hard(_id, difficulty){
-		if(difficulty == "Hard"){
+		if(difficulty === "Hard"){
 			if(this.state.question_hard.length > 1) request.post('http://localhost:3001/quiz-game/delete-question', { form: {_id} }, (error, response, body) => { console.log(body); });
 			else alert("Must at least have 1 question");
 			this.getQuestions()

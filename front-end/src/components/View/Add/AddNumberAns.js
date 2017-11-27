@@ -1,20 +1,16 @@
 import React, { Component } from 'react';
 const request = require('request');
 
-class AddMultipleChoice extends Component{
+class AddNumberAns extends Component{
 	constructor(props){
 		super(props);
 
 		this.state={
 			question: '',
-			type: 'mc',
+			type: 'num',
 			category: this.props.categoryName,
 			difficulty: 'Easy',
-			answer: 'A',
-			A:'',
-			B:'',
-			C:'',
-			D:'',
+			answer: '1',
 			can_add_question: 'false'
 		}
 		this.handleQuestionChange=this.handleQuestionChange.bind(this);
@@ -22,16 +18,12 @@ class AddMultipleChoice extends Component{
 		this.handleDifficultyChange=this.handleDifficultyChange.bind(this);
 		this.handleAnswerChange=this.handleAnswerChange.bind(this);
 		this.handleButtonClick=this.handleButtonClick.bind(this);
-		this.handleChoiceAChange=this.handleChoiceAChange.bind(this);
-		this.handleChoiceBChange=this.handleChoiceBChange.bind(this);
-		this.handleChoiceCChange=this.handleChoiceCChange.bind(this);
-		this.handleChoiceDChange=this.handleChoiceDChange.bind(this);
 		this.candAdd=this.canAdd.bind(this);
 	}
 
 
 	canAdd(){
-		if(this.state.question.trim() === '' || this.state.A.trim() === '' || this.state.B.trim() === '' || this.state.C.trim() === ''  || this.state.D.trim() === '' ){
+		if(this.state.question.trim() == ''){
 			this.setState({can_add_question: 'false'})
 		} else{
 			this.setState({can_add_question: ''})
@@ -56,18 +48,6 @@ class AddMultipleChoice extends Component{
 	handleButtonClick(e){
 		this.setState({buttonClicked:true});
 	}
-	handleChoiceAChange(e){
-		this.setState({A:e.target.value}, this.canAdd);
-	}
-	handleChoiceBChange(e){
-		this.setState({B:e.target.value}, this.canAdd);
-	}
-	handleChoiceCChange(e){
-		this.setState({C:e.target.value}, this.canAdd);
-	}
-	handleChoiceDChange(e){
-		this.setState({D:e.target.value}, this.canAdd);
-	}
 
 	add_question(){
 		const new_question = {
@@ -75,11 +55,7 @@ class AddMultipleChoice extends Component{
 			type: this.state.type,
 			category: this.state.category,
 			difficulty: this.state.difficulty,
-			answer: this.state.answer,
-			A: this.state.A,
-			B: this.state.B,
-			C: this.state.C,
-			D: this.state.D
+			answer: this.state.answer
 		}
 
 		request.post(
@@ -97,38 +73,27 @@ class AddMultipleChoice extends Component{
 
 	render(){
 		return(
-			<fieldset>
+			<div class="addQuestion">
+		    <form>
+		    <fieldset>
+				<legend><span class="number">1</span>Question</legend>
 				<QuestionInput
 				value={this.state.question}
 				changeHandler={this.handleQuestionChange}/>
 				<div className="error-message">{this.state.question === '' ? 'Question is required.' : ''}</div>
-				<p><b>Difficulty</b></p>
+				<br/>
+         		<legend><span class="number">2</span>Difficulty</legend>
 				<DifficultyInput
 				value={this.state.difficulty}
 				changeHandler={this.handleDifficultyChange}/><div className="error-message">{this.state.difficulty === ''  ? 'Difficulty is required' : ''}</div>
-				<p> <b>Choices</b></p>
-				<p>A.</p>
-				<ChoiceInput
-				value={this.state.A}
-				changeHandler={this.handleChoiceAChange}/><div className="error-message">{this.state.A === ''  ? 'Choice A is required' : ''}</div>
-				<p>B.</p>
-				<ChoiceInput
-				value={this.state.B}
-				changeHandler={this.handleChoiceBChange}/><div className="error-message">{this.state.B === ''  ? 'Choice B is required' : ''}</div>
-				<p>C.</p>
-				<ChoiceInput
-				value={this.state.C}
-				changeHandler={this.handleChoiceCChange}/><div className="error-message">{this.state.C === ''  ? 'Choice C is required' : ''}</div>
-				<p>D.</p>
-				<ChoiceInput
-				value={this.state.D}
-				changeHandler={this.handleChoiceDChange}/><div className="error-message">{this.state.D === ''  ? 'Choice D is required' :''}</div>
-				<p> <b>Answer</b></p>
+				<legend><span class="number">3</span>Answer</legend>
 				<AnswerInput
 				value={this.state.answer}
 				changeHandler={this.handleAnswerChange}/><div className="error-message">{this.state.answer === ''  ? 'Answer is required' : ''}</div>
-				<button type="button" onClick={() => this.add_question()} disabled={this.state.can_add_question}>Add Question</button>
-			</fieldset>
+				</fieldset>
+		        <button type="button" className="addQButton" onClick={() => this.add_question()} disabled={this.state.can_add_question}>Add Question</button>
+		        </form>
+		        </div>
 			);
 	}
 }
@@ -162,6 +127,34 @@ class QuestionInput extends Component{
 	}
 }
 
+class AnswerInput extends Component{
+
+	constructor(){
+		super();
+
+		this.state={
+			text:''
+		}
+
+		this.handleTextChange=this.handleTextChange.bind(this);
+	}
+	handleTextChange(e){
+		this.setState({text:e.target.value});
+	}
+
+	render(){
+		return(
+			<div>
+				<input
+				className="input"
+				type="num"
+				placeholder="Number Answer"
+				value={this.props.value}
+				onChange={this.props.changeHandler}/> {this.props.label}
+			</div>
+			);
+	}
+}
 
 class DifficultyInput extends Component{
 
@@ -193,70 +186,4 @@ class DifficultyInput extends Component{
 	}
 }
 
-class AnswerInput extends Component{
-
-	constructor(){
-		super();
-
-		this.state={
-			text:''
-		}
-
-		this.handleTextChange=this.handleTextChange.bind(this);
-	}
-	handleTextChange(e){
-		this.setState({text:e.target.value});
-	}
-
-	render(){
-		return(
-			<div>
-				<div>
-				<select className="dropdown"
-				value={this.props.value}
-				onChange={this.props.changeHandler}>
-				<option>A</option>
-				<option>B</option>
-				<option>C</option>
-				<option>D</option>
-				</select>
-			</div>
-
-			</div>
-			);
-	}
-}
-
-class ChoiceInput extends Component{
-
-	constructor(){
-		super();
-
-		this.state={
-			text:''
-		}
-
-		this.handleTextChange=this.handleTextChange.bind(this);
-	}
-	handleTextChange(e){
-		this.setState({text:e.target.value});
-	}
-
-	render(){
-		return(
-			<div>
-				<input
-				className="input"
-				type="text"
-				placeholder="Choice"
-				value={this.props.value}
-				onChange={this.props.changeHandler}/> {this.props.label}
-
-
-			</div>
-			);
-	}
-}
-
-
-export default AddMultipleChoice;
+export default AddNumberAns;

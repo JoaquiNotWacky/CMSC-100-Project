@@ -28,7 +28,7 @@ class AddText extends Component{
   }
 
   canAdd(){
-		if(this.state.question_text.trim() == '' || this.state.answer_text.trim() == ''){
+		if(this.state.question_text.trim() === '' || this.state.answer_text.trim() === ''){
 			this.setState({can_add_question: 'false'})
 		} else{
 			this.setState({can_add_question: ''})
@@ -64,21 +64,28 @@ class AddText extends Component{
 			}
 		);
 
-    		location.href = '/';
+    		location.href = '/category';
 	}
 
   render(){
     return(
-      <div>
-        <fieldset>
+      <div class="addQuestion">
+      <form>
+      <fieldset>
+         <legend><span class="number">1</span>Question</legend>
           <PlainText placeholder={this.state.question_placeholder} error={this.state.question_error} changeHandler={this.handleQuestionChange}/>
           <div className="error-message">{this.state.question_text.trim() === ''  ? 'Question is required' : ''}</div>
+          <br/>
+          <legend><span class="number">2</span>Difficulty</legend>
+          <DifficultyList changeHandler={this.handleDifficultyChange} />
+          <br/>
+          <legend><span class="number">3</span>Answer</legend>
           <PlainText placeholder={this.state.answer_placeholder} error={this.state.answer_error} changeHandler={this.handleAnswerChange}/>
           <div className="error-message">{this.state.answer_text.trim() === ''  ? 'Answer is required' : ''}</div>
-          <DifficultyList changeHandler={this.handleDifficultyChange} />
-          <button type="button" onClick={() => this.add_question()} disabled={this.state.can_add_question}>Add Question</button>
-        </fieldset>
-      </div>
+          </fieldset>
+        <button type="button" className="addQButton" onClick={() => this.add_question()} disabled={this.state.can_add_question}>Add Question</button>
+        </form>
+        </div>
     );
   }
 }

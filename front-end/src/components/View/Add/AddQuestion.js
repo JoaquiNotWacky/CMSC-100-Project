@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import AddMultipleChoice from './AddMultipleChoice';
 import AddText from './AddText';
 import AddTof from './AddTof';
+import AddNumberAns from './AddNumberAns'
+
 class AddQuestion extends Component{
 	constructor(props){
 		super(props);
@@ -44,7 +46,7 @@ class AddQuestion extends Component{
 		} else if(this.state.text_state){
 			return (<AddText categoryName={this.state.category}/>);
 		} else if(this.state.num_state){
-			return (<h3> Number </h3>);
+			return (<AddNumberAns categoryName={this.state.category}/>);
 		} else{
 			return (<h3> Pick A Question Type </h3>);
 		}
@@ -52,14 +54,17 @@ class AddQuestion extends Component{
 
 	render(){
 		return(
-			<div className="content">
+			<div className="addQuestion" id="addQuestionMain">
 				<a href={`/`}> BACK TO CATEGORIES </a>
 			<h1>{this.state.category}</h1>
-			<h2>Type of Question </h2>
-			<button onClick={this.handle_text_change}>Text</button>
-			 <button onClick={this.handle_num_change}>Number</button>
-			 <button onClick={this.handle_mc_change}>Multiple Choice</button>
-			 <button onClick={this.handle_tof_change}>True or False</button>
+			<legend><span class="title">Type of Question
+			<ul>
+			 <li><button className="pickAdd" onClick={this.handle_text_change}>Text</button></li>
+			 <li><button className="pickAdd" onClick={this.handle_num_change}>Number</button></li>
+			 <li><button className="pickAdd" onClick={this.handle_mc_change}>Multiple Choice</button></li>
+			 <li><button className="pickAdd" onClick={this.handle_tof_change}>True or False</button></li>
+			</ul>
+			</span></legend>
 			{ this.check_question_type() }
 			</div>
 		);

@@ -29,7 +29,7 @@ class Category extends Component{
 	}
 
 	display_questions(){
-		if(this.state.chosen_category == ''){
+		if(this.state.chosen_category === ''){
 			return (<h2> Pick A Category </h2>);
 		} else {
 			return (<Questions categoryId={this.state.chosen_category}/>)
@@ -56,7 +56,7 @@ class Category extends Component{
 			hard: 0
 		}
 
-		if(new_category.name.trim() != ''){
+		if(new_category.name.trim() !== ''){
 			request.post(
 				'http://localhost:3001/quiz-game/add-category',
 				{form: new_category},

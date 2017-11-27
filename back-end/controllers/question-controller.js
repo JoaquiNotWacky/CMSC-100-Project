@@ -16,6 +16,21 @@ exports.viewQuestions = (req, res) =>{
   });
 }
 
+exports.viewQuestionsDif = (req, res) =>{
+  const cat = req.params.category;
+  const dif = req.params.difficulty;
+
+  Question.find({difficulty: dif}, (err, questions) => {
+    if (err) {
+      console.log(err);
+      res.send({});
+    } else {
+      console.log(questions)
+      res.send(questions);
+    }
+  });
+}
+
 
 exports.addQuestion = (req, res) =>{
   const newQuestion = new Question(req.body);

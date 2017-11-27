@@ -16,14 +16,13 @@ class AddTof extends Component{
 
 		}
 		this.handleQuestionChange=this.handleQuestionChange.bind(this);
-		this.handleTypeChange=this.handleTypeChange.bind(this);
 		this.handleDifficultyChange=this.handleDifficultyChange.bind(this);
 		this.handleAnswerChange=this.handleAnswerChange.bind(this);
 		this.candAdd=this.canAdd.bind(this);
 	}
 
 	canAdd(){
-		if(this.state.question.trim() == '' || this.state.answer == ''){
+		if(this.state.question.trim() === '' || this.state.answer === ''){
 			this.setState({can_add_question: 'false'})
 		} else{
 			this.setState({can_add_question: ''})
@@ -32,10 +31,6 @@ class AddTof extends Component{
 
 	handleQuestionChange(e){
 		this.setState({question:e.target.value}, this.canAdd);
-	}
-
-	handleTypeChange(e){
-		this.setState({type:e.target.value});
 	}
 
 	handleDifficultyChange(e){
@@ -62,7 +57,7 @@ class AddTof extends Component{
 			}
 		);
 
-		location.href = '/';
+		location.href = '/category';
 	}
 
 	render(){
@@ -71,14 +66,11 @@ class AddTof extends Component{
 				<QuestionInput
 				value={this.state.question}
 				changeHandler={this.handleQuestionChange}/>
-				<div className="error-message">{this.state.question.trim() === '' ? 'Question is required.' : ''}</div>
 				<p><b>Difficulty</b></p>
 				<DifficultyInput
 				value={this.state.difficulty}
-				changeHandler={this.handleDifficultyChange}/><div className="error-message">{this.state.difficulty === ''  ? 'Difficulty is required' : ''}</div>
-				<p> <b>Answer</b></p>
+				changeHandler={this.handleDifficultyChange}/>
 				<AnswerInput value={this.state.answer} changeHandler={this.handleAnswerChange}/>
-				<div className="error-message">{this.state.answer === ''  ? 'Answer is required' : ''}</div>
 				<button type="button" onClick={() => this.add_question()} disabled={this.state.can_add_question}>Add Question</button>
 			</fieldset>
 			);
